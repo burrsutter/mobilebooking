@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+   <modelVersion>4.0.0</modelVersion>
+   <parent>
+      <groupId>org.jboss.seam</groupId>
+      <artifactId>seam-parent</artifactId>
+      <version>10</version>
+   </parent>
+
+   <groupId>org.jboss.seam.examples</groupId>
+   <artifactId>seam-examples-parent</artifactId>
+   <packaging>pom</packaging>
+   <version>3.0.1-SNAPSHOT</version>
+   <name>Seam Examples</name>
+
+   <description>
+      Examples for the Seam Framework
+   </description>
+
+   <url>http://www.seamframework.org/Seam3</url>
+
+   <properties>
+      <seam.version>3.0.0.Final</seam.version>
+   </properties>
+
+   <modules>
+      <module>booking</module>
+   </modules>
+
+   <dependencyManagement>
+      <dependencies>
+         <dependency>
+	    <groupId>org.jboss.seam</groupId>
+	       <artifactId>seam-bom</artifactId>
+	       <version>${seam.version}</version>
+	       <scope>import</scope>
+	       <type>pom</type>
+	    </dependency>
+       </dependencies>
+   </dependencyManagement>
+
+   <build>
+      <defaultGoal>package</defaultGoal>
+      <pluginManagement>
+         <plugins>
+            <plugin>
+               <groupId>org.apache.maven.plugins</groupId>
+               <artifactId>maven-eclipse-plugin</artifactId>
+               <configuration>
+                  <classpathContainers>
+                     <classpathContainer>org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/J2SE-1.5</classpathContainer>
+                  </classpathContainers>
+               </configuration>
+            </plugin>
+            <plugin>
+               <groupId>org.apache.maven.plugins</groupId>
+               <artifactId>maven-ejb-plugin</artifactId>
+               <configuration>
+                  <ejbVersion>3.0</ejbVersion>
+               </configuration>
+            </plugin>
+
+         </plugins>
+
+      </pluginManagement>
+      <plugins>
+         <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-source-plugin</artifactId>
+            <executions>
+               <execution>
+                  <id>attach-sources</id>
+                  <phase>verify</phase>
+                  <goals>
+                     <goal>jar</goal>
+                  </goals>
+               </execution>
+            </executions>
+         </plugin>
+      </plugins>
+
+   </build>
+
+   <profiles>
+      <profile>
+         <id>jboss-public-repository</id>
+         <activation>
+            <property>
+               <name>jboss-public-repository</name>
+               <value>!false</value>
+            </property>
+         </activation>
+         <repositories>
+            <repository>
+               <id>jboss-public-repository-group</id>
+               <name>JBoss Public Maven Repository Group</name>
+               <url>http://repository.jboss.org/nexus/content/groups/public</url>
+               <releases>
+                  <enabled>true</enabled>
+                  <updatePolicy>never</updatePolicy>
+               </releases>
+               <snapshots>
+                  <enabled>false</enabled>
+                  <updatePolicy>never</updatePolicy>
+               </snapshots>
+            </repository>
+         </repositories>
+         <pluginRepositories>
+            <pluginRepository>
+               <id>jboss-public-repository-group</id>
+               <name>JBoss Public Maven Repository Group</name>
+               <url>http://repository.jboss.org/nexus/content/groups/public</url>
+               <releases>
+                  <enabled>true</enabled>
+                  <updatePolicy>never</updatePolicy>
+               </releases>
+               <snapshots>
+                  <enabled>false</enabled>
+                  <updatePolicy>never</updatePolicy>
+               </snapshots>
+            </pluginRepository>
+         </pluginRepositories>
+      </profile>
+   </profiles>
+
+   <scm>
+      <connection>scm:git:git://github.com/seam/examples.git</connection>
+      <developerConnection>scm:git:git@github.com:seam/examples.git</developerConnection>
+      <url>http://github.com/seam/examples</url>
+   </scm>
+
+</project>
