@@ -1,0 +1,41 @@
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>Mobile Hotel Listing</title>
+	<link rel="stylesheet"  href="http://code.jquery.com/mobile/1.0b3/jquery.mobile-1.0b3.min.css" /> 
+	<script src="jquery-1.6.2.min.js"></script>
+	<script src="jquery.mobile-1.0b3.min.js"></script>
+	
+</head>
+<script>
+
+$(document).ready(function() {
+	$.getJSON("rest/hotels", function(returnedHotels) {
+				// console.log("returned are " + returnedHotels);				
+				$.each(returnedHotels, function(index, aHotel) {
+					// console.log(aHotel.name);
+					// console.log(aHotel.location);
+					// console.log(aHotel.id);		
+					 $("#items").append(
+							 '<li><a href="hotel.html?id='
+							 + aHotel.id 
+							 + '" data-role="button" data-ajax="false">'+ aHotel.name + '</a></li>'
+					 );			
+				});
+				$("#items").listview("refresh");
+			});
+});			
+</script>			
+<body>
+<div id="home" data-role="page" data-theme="a">
+	<div data-role="content">
+			<ul  id="items" data-role="listview" data-inset="true" data-theme="a" data-dividertheme="a">
+			<li data-role="list-divider">Hotels</li>			
+		</ul>
+	</div><!-- id="home" -->
+</div><!-- data-role="page" -->
+
+
+</body>
+</html>

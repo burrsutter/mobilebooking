@@ -1,0 +1,100 @@
+<html>
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Page Title</title>
+<link rel="stylesheet"
+	href="http://code.jquery.com/mobile/1.0b3/jquery.mobile-1.0b3.min.css" />
+<script src="http://code.jquery.com/jquery-1.6.3.min.js"></script>
+<script
+	src="http://code.jquery.com/mobile/1.0b3/jquery.mobile-1.0b3.min.js"></script>
+
+<script>
+$(document).ready(function() {
+	console.log("here I am");
+	var id = getUrlVars()["id"];
+	console.log("id=" + id);
+	// if id is null/blank, return
+	$.getJSON("rest/hotels/" + id, function(theHotel) {
+		console.log("hotel: " + theHotel.name);
+		console.log("address: " + theHotel.address);
+		console.log("city: " + theHotel.city);
+		console.log("state: " + theHotel.state);
+		console.log("zip: " + theHotel.zip);
+		console.log("class: " + theHotel.stars);
+		console.log("price:" + theHotel.price);
+		document.title = theHotel.name;
+		$("#hotelName").text(theHotel.name);
+		$("#hotelAddress").text(theHotel.address);
+		$("#hotelCity").text(theHotel.city);
+		$("#hotelState").text(theHotel.state);
+		$("#hotelZip").text(theHotel.zip);
+		$("#hotelCountry").text(theHotel.country);
+		$("#hotelStars").attr("src","img/" + theHotel.stars + "-star.gif");
+		$("#hotelPrice").text(theHotel.price);		
+	});				
+});	
+// from http://jquery-howto.blogspot.com/2009/09/get-url-parameters-values-with-jquery.html
+function getUrlVars()
+{
+    var vars = [], hash;
+    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+    for(var i = 0; i < hashes.length; i++)
+    {
+        hash = hashes[i].split('=');
+        vars.push(hash[0]);
+        vars[hash[0]] = hash[1];
+    }
+    return vars;
+}
+</script>
+</head>
+
+
+<body>
+	<!-- Start of hotel page: #hotel -->
+	<div id="hotel" data-role="page" data-theme="a">
+
+		<div>
+			<span class="label">Name:</span>
+			<span class="output" id="hotelName"></span>
+		</div>
+		<div>
+			<span class="label">Address:</span>
+			<span class="output" id="hotelAddress"></span>
+		</div>
+		<div>
+			<span class="label">City:</span>
+			<span class="output" id="hotelCity"></span>
+		</div>
+		<div>
+			<span class="label">State:</span>
+			<span class="output" id="hotelState"></span>
+		</div>
+		<div>
+			<span class="label">Zip:</span>
+			<span class="output" id="hotelZip"></span>
+		</div>
+		<div>
+			<span class="label">Country:</span>
+			<span class="output" id="hotelCountry"></span>
+		</div>
+		<div>
+			<span class="label">Class:</span>
+			<img id="hotelStars" src="img/5-star.gif" style="padding-top: 4px;">
+		</div>
+		<div>
+			<span class="label">Price:</span>
+			<span class="output" id="hotelPrice"></span>
+		</div>
+		
+
+		<a href="#home" data-rel="back" data-role="button" data-theme="a">Hotel
+			Listing</a>
+	</div>
+	<!-- id="hotel" -->
+
+
+</body>
+</html>
